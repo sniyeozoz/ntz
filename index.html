@@ -78,7 +78,7 @@ html,body{background:var(--bg);color:var(--text);font-family:var(--sans);overscr
 .empty-state{text-align:center;padding:28px 0;color:var(--text3);font-size:13px;line-height:2}
 .empty-icon{font-size:28px;display:block;margin-bottom:8px}
 
-.add-fab{position:fixed;bottom:calc(var(--sb)+68px+16px);right:20px;width:52px;height:52px;border-radius:50%;background:var(--text);color:var(--bg);border:none;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.5);z-index:49;transition:opacity .15s}
+.add-fab{display:flex;position:fixed;bottom:calc(var(--sb)+68px+16px);right:20px;width:52px;height:52px;border-radius:50%;background:var(--text);color:var(--bg);border:none;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.5);z-index:49;transition:opacity .15s}
 .add-fab:active{opacity:.8}
 
 /* Update banner */
@@ -148,7 +148,7 @@ html,body{background:var(--bg);color:var(--text);font-family:var(--sans);overscr
 .hist-card-val{font-size:24px;font-weight:700;font-family:var(--mono)}
 .hist-card-unit{font-size:11px;color:var(--text2);margin-top:2px}
 .hist-card-val.p{color:var(--protein)}.hist-card-val.f{color:var(--fat)}.hist-card-val.c{color:var(--carb)}.hist-card-val.k{color:var(--text)}
-.hist-section{padding:0 20px}
+.hist-section{padding:0 20px 20px}
 .hist-day-block{margin-bottom:12px}
 .hist-day-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:12px 12px 0 0;cursor:pointer}
 .hist-day-header.collapsed{border-radius:12px}
@@ -598,6 +598,7 @@ function addFromAI(){
   arr.push({name:lastEstimate.food,meal,weight:null,protein:lastEstimate.protein,fat:lastEstimate.fat,carb:lastEstimate.carb});
   saveDayEntries(iso,arr);
   if(iso===todayStr) renderToday();
+$('add-fab').style.display='flex';
   const mealInfo=getMealInfo(meal);
   $('ai-result-body').innerHTML=`<div class="ai-added-msg">✓ 已加入「${displayDate(iso)}」${mealInfo.icon}${mealInfo.label}</div>`;
   setTimeout(()=>{$('ai-result').classList.remove('visible');$('ai-inp').value='';lastEstimate=null;},1200);
@@ -694,6 +695,7 @@ try{apiKey=localStorage.getItem('nt_api_key')||'';}catch(e){}
 try{let dates=JSON.parse(localStorage.getItem('nt_dates')||'[]');if(!dates.includes(todayStr)){dates.push(todayStr);localStorage.setItem('nt_dates',JSON.stringify(dates));}}catch(e){}
 renderApiStatus();
 renderToday();
+$('add-fab').style.display='flex';
 </script>
 </body>
 </html>
